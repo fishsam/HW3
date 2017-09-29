@@ -1,31 +1,30 @@
-<%-- 
-    Document   : results
-    Created on : Sep 28, 2017, 5:13:18 PM
-    Author     : sfishman
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Salary Info</title>
-        <link href="style.css" rel="stylesheet" type='text/css'/>
+        <title>Salary Information</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
     </head>
+    
     <%
-        double Hours = Double.parseDouble (request.getParameter("hours"));
-        double Rate = Double.parseDouble (request.getParameter("HourlyRate"));
+        double Hours = Double.parseDouble (request.getParameter("hoursworked"));
+        double Rate = Double.parseDouble (request.getParameter("hourlypay"));
         double PreTaxDeductions = Double.parseDouble (request.getParameter("pretaxdeductions"));
         double PostTaxDeductions = Double.parseDouble (request.getParameter("posttaxdeductions"));
+        
         %>
-        <div class ="info">
+        
+        
     <body>
-    <hl>Salary Info</hl>
+        <h1>Salary Info</h1>
     <hr>
     <table border ='4px gold' class='center'>
         <tbody>
             <tr>
-                <td>Total Hours</td>
+                <td>Total Hours </td>
                 <td>$<%=Hours %></td>
             </tr>
             <tr>
@@ -38,7 +37,7 @@
                     <% if (Hours > 40) {%>
                     <%=Hours - 40 %>
                     <% } else {%>
-                    Overtime not reached.
+                    overtime not reached.
                     <%}%>
                 </td>
             </tr>
@@ -52,6 +51,7 @@
                     <%double grosspay;%>
                     <% if(Hours > 40) {%>
                     $<%=grosspay =(Rate * 40) + ((Hours -40)*(1.5 * Rate))%>
+                    
                     <% } else {%>
                     $<%=grosspay=(Hours * Rate)%>
                 </td>
@@ -68,7 +68,30 @@
             <tr>
                 <td>Tax Amount</td>
                 <td>
-                    
-        <h1>Hello World!</h1>
+                 <%double taxamount;%>
+                 <% if(pretaxpay > 500){%>
+                 $<%=taxamount=(pretaxpay * 0.22)%>
+                 <% } else {%>
+                 $<%=taxamount=(pretaxpay * 0.18)%>
+                 <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td>Post-Tax Deductions </td>
+                <td>$<%=PostTaxDeductions %></td>
+            </tr>
+            <tr>
+                <td>Post-Tax Pay</td>
+                <td>
+                    <%double posttaxpay;%>
+                    $<%=posttaxpay=grosspay - taxamount %></td>
+            </tr>
+            <tr>
+                <td>Net Pay</td>
+                <td>$<%= posttaxpay - PostTaxDeductions %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     </body>
 </html>
