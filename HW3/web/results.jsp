@@ -12,8 +12,8 @@
     <%
         double Hours = Double.parseDouble (request.getParameter("hoursworked"));
         double Rate = Double.parseDouble (request.getParameter("hourlypay"));
-        double PreTaxDeductions = Double.parseDouble (request.getParameter("pretaxdeductions"));
-        double PostTaxDeductions = Double.parseDouble (request.getParameter("posttaxdeductions"));
+        double PreTaxDeductions = Double.parseDouble (request.getParameter("pretaxdeduct"));
+        double PostTaxDeductions = Double.parseDouble (request.getParameter("posttaxdeduct"));
         
         %>
         
@@ -21,7 +21,7 @@
     <body>
         <h1>Salary Info</h1>
     <hr>
-    <table border ='4px gold' class='center'>
+    <table>
         <tbody>
             <tr>
                 <td>Total Hours </td>
